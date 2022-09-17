@@ -1,0 +1,24 @@
+name: deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repositories
+        uses: actions/checkout@v3
+
+      - name: Init ssh key
+        run: |
+          set -eu
+          mkdir "$HOME/.ssh"
+          echo "${{ secrets.ssh_key }}" > "$HOME/.ssh/id_rsa"
+          chmod 600 "$HOME/.ssh/id_rsa"
+      
+      - name: Deployment
+        run: rsync -c -r -l -O -t -e "ssh -p ${{ secrets.ssh_port }} -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" -a -z --delete . ${{ secrets.deploy_path }}

@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "Salma-alfasans-light";
+  src: url(../fonts/Salma-alfasans-light.otf);
+}
+
+@font-face {
+  font-family: "Salma-alfasans-light-italic";
+  src: url(../fonts/Salma-alfasans-light-italic.otf);
+}
+
+html,
+body {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: "Salma-alfasans-light";
+  background-color: #2596be;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 24px;
+}
+
+.git-hub-link img {
+  width: 32px;
+  height: 32px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 3;
+}
+
+.preview {
+  color: #ffffff;
+  user-select: none;
+}
+
+.preview .title {
+  font-size: 5vw;
+}
