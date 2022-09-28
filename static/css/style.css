@@ -17,10 +17,41 @@ body {
   background-color: #2596be;
 }
 
-.app {
+.layout,
+.layout-has-sidebar {
   display: flex;
+  flex: auto;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.layout-has-sidebar {
+  flex-direction: row;
+}
+
+.sidebar {
+  width: 176px;
+  background-color: #2088ad;
+  color: white;
+  padding: 12px;
+}
+
+.sidebar h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.apps-list {
+  list-style: none;
+}
+
+.apps-list li {
+  cursor: pointer;
+}
+
+.apps-list a {
+  color: white;
+  text-decoration: none;
 }
 
 .header {
