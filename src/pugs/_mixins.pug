@@ -1,0 +1,15 @@
+mixin getStyles()
+  - for (let css in htmlWebpackPlugin.files.css)
+    link(rel="stylesheet", href=htmlWebpackPlugin.files.css[css])
+
+mixin getScripts()
+  - for (let js in htmlWebpackPlugin.files.js)
+    script(src=htmlWebpackPlugin.files.js[js])
+
+mixin getHead(title)
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title=title
+    + getStyles()
