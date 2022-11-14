@@ -1,0 +1,51 @@
+name: deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm i --force
+
+      - name: App build
+        run: npm run build
+
+      - name: Upload build
+        uses: actions/upload-artifact@v3
+        with:
+          name: production-build
+          path: ./build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v3
+        with:
+          name: production-build
+          path: ./build
+
+      - name: Init ssh key
+        run: |
+          set -eu
+          mkdir "$HOME/.ssh"
+          echo "${{ secrets.ssh_key }}" > "$HOME/.ssh/id_rsa"
+          chmod 600 "$HOME/.ssh/id_rsa"
+      - name: Deployment
+        run: cd build && rsync -c -r -l -O -t -e "ssh -p ${{ secrets.ssh_port }} -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" -a -z --delete . ${{ secrets.deploy_path }}
