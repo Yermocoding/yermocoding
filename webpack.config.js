@@ -9,7 +9,7 @@ module.exports = {
   target: process.env.NODE_ENV === "development" ? "web" : "browserslist",
   entry: { main: path.join(__dirname, "./src") },
   output: {
-    filename: "[name].js",
+    filename: "[name].[contenthash].js",
     path: path.join(__dirname, "./build"),
     clean: true,
   },
@@ -23,10 +23,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: `${path.join(__dirname, "./src")}/pugs/index.pug`,
-      minify: false,
       inject: false,
     }),
-    new MiniCssExtractPlugin({ filename: "[name].css" }),
+    new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -41,7 +40,7 @@ module.exports = {
     rules: [
       {
         test: /\.html$/i,
-        use: { loader: "html-loader", options: { minimize: false } },
+        use: "html-loader",
       },
       {
         test: /\.pug$/i,
@@ -65,10 +64,7 @@ module.exports = {
               },
             },
           },
-          {
-            loader: "sass-loader",
-            options: { sassOptions: { outputStyle: "expanded" } },
-          },
+          "sass-loader",
         ],
       },
       {

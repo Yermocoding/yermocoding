@@ -1,5 +1,66 @@
 @import "fonts";
+@import "vars";
+@import "reset";
+@import "mixins";
 
-* {
-  font-family: "Salma-alfasans-light";
+/** WRAPPER */
+
+.wrapper {
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1130px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+/** PAGE */
+
+.page {
+  @include flexbox();
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/** ABOUT */
+
+.about {
+  @include flexbox();
+  align-items: center;
+  position: relative;
+  flex: 1 0 100%;
+
+  &__title {
+    @include flexbox();
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    margin-bottom: 24px;
+
+    h1 {
+      font-size: 32px;
+    }
+
+    span {
+      font-size: 16px;
+      color: #a6a6a6;
+    }
+  }
+
+  &__social {
+    @include flexbox();
+    justify-content: center;
+
+    .github {
+      img {
+        width: 27px;
+      }
+    }
+  }
 }

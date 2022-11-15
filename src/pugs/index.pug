@@ -4,6 +4,15 @@ doctype html
 html(lang='en')
   + getHead('Ermolaev-code')
   body
-    .container
-      h1 Ermolaev-code
+    .wrapper
+      main.page
+        .about
+          .container
+            .about__title
+              h1 Sergei Ermolaev
+              span Front-end developer
+            .about__social
+              .github
+                a(href="https://github.com/ermolaev-code")
+                  img(src="assets/images/github.png" alt="github/ermolaev-code" title="github/ermolaev-code")
     + getScripts()
